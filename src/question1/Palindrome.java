@@ -27,10 +27,9 @@ public class Palindrome {
 			}
 
 		}
-
+		
 		// Print Longest palindrome and number which has it
 		System.out.println("Longest Chain = " + longest_pal + "\nNumber = " + longest_pals_num);
-
 	}
 
 	// Returns reversed number
