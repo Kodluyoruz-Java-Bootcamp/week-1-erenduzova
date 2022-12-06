@@ -1,46 +1,62 @@
 package question1;
 
+import java.util.ArrayList;
+
 public class Palindrome {
 
 	public static void main(String[] args) {
 
-		// variables for answer
-		int longest_pal = 0;
-		int longest_pals_num = 0;
+		ArrayList<Long> longestChain = new ArrayList<>();
+		ArrayList<Long> chain = new ArrayList<>();
 
-		// Loop for finding the longest palindrome
-		for (int number = 10; number <= 100; number++) {
+		Long rNumber;
+		Long tmpNumber;
 
-			int tmpNumber = number;
-			int rNumber = reverseNum(tmpNumber);
+		// Loop for finding the longest chain
+		for (Long number = 10L; number <= 100L; number++) {
+			// Clear chain for new number
+			chain.clear();
+			// add number as first element of chain
+			chain.add(number);
+
+			tmpNumber = number;
+			rNumber = reverseNum(tmpNumber);
 
 			// Is tmpNumber palindrome
-			while (tmpNumber != rNumber) {
+			while (!(tmpNumber.equals(rNumber))) {
+				
+				// Stop loop after 30. iteration to prevent infinite loop
+				if (chain.size() >= 30) {
+					chain.clear();
+					break;
+				}
+				
 				tmpNumber += rNumber;
+				chain.add(tmpNumber);
 				rNumber = reverseNum(tmpNumber);
 			}
 
-			// Is palindrome longer than longest
-			if (longest_pal < tmpNumber) {
-				longest_pal = tmpNumber;
-				longest_pals_num = number;
+			// Is chain longer than longest
+			if (chain.size() > longestChain.size()) {
+				longestChain = new ArrayList<Long>(chain);
 			}
 
 		}
-		
-		// Print Longest palindrome and number which has it
-		System.out.println("Longest Chain = " + longest_pal + "\nNumber = " + longest_pals_num);
+		// print answer
+		System.out.println("Longest Chain = " + longestChain + "\n" + "Number = " + longestChain.get(0)
+				+ "\nIterations= " + (longestChain.size() - 1));
 	}
 
 	// Returns reversed number
-	public static int reverseNum(int num) {
-		int reverse = 0;
-		while (num != 0) {
-			int remainder = num % 10;
+	public static Long reverseNum(Long num) {
+		Long reverse = 0L;
+		while (num > 0L) {
+			Long remainder = num % 10;
 			reverse = reverse * 10 + remainder;
-			num = num / 10;
+			num /= 10;
 		}
 		return reverse;
+
 	}
 
 }
