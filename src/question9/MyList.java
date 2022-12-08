@@ -17,6 +17,7 @@ public class MyList {
 
 	public void add(String newString) {
 		
+		newString = newString.toUpperCase();
 		// is newString startsWith 'C'
 		if (!(newString.startsWith("C"))) {
 			System.out.println("C ile başlamıyor");
